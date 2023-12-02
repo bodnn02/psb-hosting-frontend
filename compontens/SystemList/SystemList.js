@@ -50,7 +50,7 @@ const SystemList = ({ systems, selectedSystem: propSelectedSystem = null, onSele
     setIsOpen((prev) => ({ ...prev, [systemId]: false }));
   };
 
-  var productSystems = systems.os.reduce((acc, os) => {
+  var productSystems = systems.reduce((acc, os) => {
     const osName = os.name.split(/[-\s]/)[0].toLowerCase();
     const existingOS = acc.find(item => item.name === osName);
 
