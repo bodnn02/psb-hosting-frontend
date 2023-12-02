@@ -1,0 +1,15 @@
+.button {
+  position: fixed;
+  right: 20px;
+  bottom: 15px;
+  border: none;
+  background-color: transparent;
+  z-index: 10;
+  @media screen and (max-width: 990px) {
+    right: 8px;
+  }
+
+  &:hover {
+    filter: brightness(1.3);
+  }
+}

@@ -1,0 +1,73 @@
+.card {
+  background: #f5f6f7;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+
+  @media screen and (max-width: 580px) {
+    display: flex;
+    padding: 5.5px 16px;
+    justify-content: space-between;
+  }
+
+  &__selected {
+    background: #fff;
+    box-shadow: 0px 5px 25px 0px rgba(71, 71, 71, 0.25);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  &__info {
+    display: grid;
+
+    @media screen and (max-width: 580px) {
+      display: flex;
+    }
+  }
+
+  &__image {
+    width: 36px;
+    height: 36px;
+    margin: 0 0 24px 0;
+
+    @media screen and (max-width: 580px) {
+      width: 24px;
+      height: 24px;
+      margin: 0 12px 0 0;
+    }
+  }
+
+  &__title {
+    margin: 0 0 4px 0;
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    @media screen and (max-width: 580px) {
+      display: flex;
+      align-self: center;
+      margin: 0 47px 0 0;
+    }
+  }
+
+  &__list,
+  &__option {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    background: #f5f6f7;
+    margin: 0;
+    color: #888;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &_text {
+      font-size: 12px;
+      color: red;
+    }
+  }
+}

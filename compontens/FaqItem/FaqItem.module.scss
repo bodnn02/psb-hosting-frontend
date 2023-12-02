@@ -1,0 +1,96 @@
+.faq {
+  &__item {
+    padding: 20px 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  &__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-weight: 500;
+    color: #4E9AA5;
+    font-size: 20px;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(../../public/chervon.svg);
+    background-position: center;
+    transform: rotate(180deg);
+    transition: transform .2s linear;
+    cursor: pointer;
+
+    @media screen and (max-width: 530px) {
+      display: none;
+    }
+
+    &_open {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__answer {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .2s ease-out, margin-top .2s ease-out;
+
+    &-list {
+      @media screen and (max-width: 530px) {
+        display: none;
+      }
+    }
+  }
+
+  &__list {
+    display: none;
+
+    @media screen and (max-width: 530px) {
+      flex-direction: column;
+
+      &_active {
+        display: flex;
+      }
+
+      li {
+        position: relative;
+        padding-left: 15px;
+        font-size: 14px;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  &__link {
+    color: #4E9AA5;
+    word-wrap: break-word;
+
+    @media screen and (max-width: 530px) {
+      font-size: 14px;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &__span {
+    display: block;
+  }
+}

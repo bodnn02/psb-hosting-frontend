@@ -1,0 +1,268 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+/* swiper pagination */
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  background-color: #d9d9d9 !important;
+}
+
+.swiper-pagination-bullet:not(:last-child) {
+  margin-right: 55px !important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: #4e9aa5 !important;
+}
+
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 24px;
+}
+
+/* range */
+.range-slider {
+  height: 2px !important;
+}
+
+.range-slider__range {
+  background: #4e9aa5 !important;
+  height: 2px !important;
+}
+
+.range-slider__thumb {
+  background: #4e9aa5 !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+body {
+  color: #000;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+.container {
+  width: 100%;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.15s linear, visibility 0.15s linear;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.h2-title {
+  font-size: 32px;
+  padding-bottom: 32px;
+  font-weight: 700;
+}
+.h3-title {
+  font-size: 32px;
+  margin-bottom: 1rem;
+}
+
+.h4-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.page-account {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-color: #fff;
+  font-size: 14px;
+}
+.account-main {
+  max-width: 1520px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) {
+  .account-main {
+    margin: 0 20px;
+    margin-bottom: 20px;
+
+    width: calc(100% - 40px);
+  }
+  
+}
+. {
+  flex: 1 0 auto;
+  /*padding: 64px 0 0 404px;*/
+  color: #282f53;
+}
+
+.account-main_container {
+  width: 100%;
+
+  display: inline-flex;
+  justify-content: space-between;
+  margin-top: 64px;
+}
+
+.account-main_cards {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  margin-left: 96px;
+}
+
+.account-main_sidebar-mini {
+  padding: 75px calc(15px + 0.75rem) 0 calc(90px + 0.75rem);
+}
+
+.section-account {
+  padding: 0;
+  margin-bottom: 36px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: #fff;
+  /*border: 1px solid rgba(0, 0, 0, 0.125);*/
+  background-clip: border-box;
+  border-radius: 7px;
+  /*box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);*/
+}
+
+.section-account-title {
+  border-radius: 7px 7px 0 0;
+  padding: 0 0 26.5px 0;
+  /*border-bottom: 1px solid #e9edf4;*/
+  /*letter-spacing: 0.2px;*/
+  font-size: 1rem;
+  font-weight: 500;
+}
+section {
+  /*margin-bottom: 64px;*/
+}
+section:nth-last-child(1) {
+  margin-bottom: 0;
+}
+.main {
+  max-width: 1380px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 64px;
+}
+
+@media screen and (max-width: 1560px) {
+  .page-account,
+  .main {
+    max-width: 1330px;
+  }
+  .account-main_container {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 1330px) {
+  .account-main_container {
+    justify-content: space-evenly;
+  }
+  .account-main_cards {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .page-account {
+    /*max-width: 991px;*/
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .account-main {
+    /*padding: 75px calc(15px + 0.75rem) 0 calc(15px + 0.75rem);*/
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .main {
+    max-width: 980px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .main {
+    max-width: 720px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .section-account-title {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 48px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .h2-title {
+    font-size: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .account-main_container {
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .account-main_cards {
+    gap: 32px;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}

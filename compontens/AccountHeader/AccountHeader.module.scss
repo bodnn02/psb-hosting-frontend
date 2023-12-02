@@ -1,0 +1,319 @@
+@keyframes pulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  8% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  15% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+.header {
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*top: 0;*/
+  max-width: 1520px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  /*border-bottom: 1px solid #e9edf4;*/
+  background: #ffffff;
+  transition: padding-left 0.3s ease;
+  /*padding-left: calc(404px + 0.75rem + 10px);*/
+  /*padding-right: calc(0.75rem + 10px);*/
+  display: flex;
+  height: 117px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+
+  @media screen and (max-width: 1330px) {
+    z-index: 100;
+    padding-left: calc(15px + 0.75rem);
+    padding-right: calc(15px + 0.75rem);
+  }
+
+  @media screen and (max-width: 580px) {
+    height: 80px;
+    padding: 0 20px;
+    margin-bottom: 32px;
+  }
+
+  /*&__report-list {
+    display: flex;
+    margin-left: 110px;
+
+    @media screen and (max-width: 1280px) {
+      margin-left: 55px;
+    }
+
+    @media screen and (max-width: 860px) {
+      display: none;
+    }
+  }*/
+
+  &__separator-line {
+    margin: 0 32px 0 32px;
+    align-self: center;
+    width: 40px;
+    height: 1px;
+    background: rgba(136, 136, 136, 0.5);
+    transform: rotate(90deg);
+  }
+
+  &_mini {
+    /*padding-left: 100px;*/
+  }
+
+  &__toggle-sidebar {
+    background-color: transparent;
+    border: none;
+    background-image: url(../../public/icon-toggle-sidebar.svg);
+    height: 16px;
+    width: 16px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-size: contain;
+  }
+
+  &__link-logo {
+    display: flex;
+
+    @media screen and (max-width: 991px) {
+      display: block;
+    }
+
+    & img {
+      /*line-height: 2rem;*/
+      vertical-align: middle;
+      width: auto;
+      max-height: 50px;
+      object-fit: contain;
+    }
+  }
+
+  &__toggler-menu {
+    display: none;
+    cursor: pointer;
+    padding: 2px;
+    font-size: 1.125rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+
+    @media screen and (max-width: 991px) {
+      display: block;
+    }
+
+    & iconify-icon {
+      text-align: center;
+      position: relative;
+      color: #79c8c2;
+      font-size: 16px;
+    }
+  }
+  .hamburger_btn .hamburger {
+    display: none;
+  }
+  .hamburger_btn .hamburgerClose {
+    display: none;
+  }
+  .hamburger_btn .hamburgerActive {
+    display: block;
+  }
+  .hamburger_btn .hamburgerCloseActive {
+    display: block;
+  }
+  &__navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 284px;
+    /*column-gap: 14px;*/
+
+    @media screen and (max-width: 580px) {
+      width: min-content;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      height: 2.5rem;
+      font-size: 1.2rem;
+
+      &_avatar {
+        margin: 0 24px 0 0;
+
+        @media screen and (max-width: 991px) {
+          margin: 0;
+        }
+      }
+    }
+
+    @media (max-width: 580px) {
+      &-item:first-child {
+        display: none;
+      }
+    }
+
+    &-desktop {
+      @media screen and (max-width: 991px) {
+        /*display: none;*/
+      }
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #79c8c2;
+    padding: 0;
+
+    & iconify-icon {
+      font-size: 20px;
+    }
+
+    &_country {
+      display: flex;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #79c8c2;
+      padding: 0;
+      line-height: 1.2;
+
+      & span {
+        margin-left: 0.5rem;
+        font-size: 16px;
+        font-weight: 400;
+
+        @media screen and (max-width: 1280px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__pulse {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c03c;
+
+    &::before {
+      content: "";
+      top: -4px;
+      right: -4px;
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(34, 192, 60, 0.6);
+      cursor: pointer;
+      box-shadow: 0 0 0 rgba(34, 192, 60, 0.9);
+      animation: pulse 1s linear infinite;
+    }
+  }
+
+  &__avatar {
+    width: 2.2rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    border-radius: 50%;
+    background: #4e9aa5 no-repeat center/cover;
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+    vertical-align: bottom;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    @media screen and (max-width: 580px) {
+      margin-right: 16px;
+    }
+  }
+
+  &__mobile-menu {
+    visibility: hidden;
+    overflow: hidden;
+    margin-top: 75px;
+    height: 0;
+    padding: 6px 10px;
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    z-index: 999;
+    box-shadow: 0 12px 11px -3px rgba(104, 113, 123, 0.1);
+    left: 0;
+    right: 0;
+    top: 0;
+    transition: height 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+    &_show {
+      visibility: visible;
+      height: 62px;
+    }
+  }
+}
+
+.popup__button-country {
+  text-align: justify;
+  font-size: 16px;
+  border-radius: 8px;
+  padding: 12px 24px;
+  /*min-width: 2.75rem;*/
+  font-weight: 500;
+  /*letter-spacing: 0.03em;*/
+  line-height: normal;
+  cursor: pointer;
+  border: none;
+  background: #f5f6f7;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &::before {
+    content: "";
+    width: 31px;
+    height: 29px;
+    border-radius: 150px;
+    margin-right: 16px;
+  }
+
+  &_us::before {
+    background: url(../../public/us.svg) lightgray 50% / cover no-repeat;
+  }
+
+  &_ru::before {
+    background: url(../../public/ru.svg) lightgray 50% / cover no-repeat;
+  }
+
+  &:hover {
+    border: 1px solid #79c8c2;
+    box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.popup__button-arrow {
+  margin-left: 16px;
+}

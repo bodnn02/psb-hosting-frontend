@@ -1,0 +1,72 @@
+.systems {
+  display: grid;
+
+  &-title {
+    justify-self: center;
+    text-align: center;
+
+    @media screen and (max-width: 1024px) {
+      max-width: 635px;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+
+    &-mobile {
+      display: none;
+
+      @media screen and (max-width: 500px) {
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+
+    &-title {
+      text-align: center;
+      font-weight: 400;
+      font-size: 32px;
+
+      @media screen and (max-width: 1550px) {
+        font-size: 24px;
+      }
+
+      @media screen and (max-width: 840px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__image {
+    height: 160px;
+    width: 160px;
+
+    @media screen and (max-width: 1550px) {
+      height: 100px;
+      width: 100px;
+    }
+
+    @media screen and (max-width: 840px) {
+      height: 60px;
+      width: 60px;
+    }
+
+    @media screen and (max-width: 380px) {
+      height: 40px;
+      width: 40px;
+    }
+  }
+}

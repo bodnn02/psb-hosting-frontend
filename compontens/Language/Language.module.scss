@@ -1,0 +1,137 @@
+.language {
+  &-wrapper {
+    width: 189px;
+    position: relative;
+    padding: 12px 24px;
+    background-color: #F5F6F7;
+    border-radius: 8px;
+
+    @media screen and (max-width: 1280px) {
+      padding: 9px 24px;
+    }
+
+    &_mobile {
+      width: 204px;
+      height: 50px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    row-gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 7%;
+    padding: 12px 24px 13px;
+    font-size: 1rem;
+    background-color: #F5F6F7;
+    transition: opacity .5s linear, visibility 0.5s linear;
+
+    &_visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &_reverse {
+      flex-direction: column-reverse;
+    }
+
+    &_mobile {
+      flex-direction: row;
+      column-gap: 10px;
+      border-radius: 0;
+      width: 310px;
+      border: transparent;
+      border-radius: 8px;
+
+      @media screen and (max-width: 360px) {
+        width: 290px;
+      }
+
+      &-reverse {
+        flex-direction: row-reverse;
+        border-radius: 0;
+        width: 310px;
+
+        @media screen and (max-width: 360px) {
+          width: 290px;
+        }
+      }
+    }
+  }
+
+  &__input {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: inherit;
+    row-gap: 7px;
+    column-gap: 16px;
+    width: max-content;
+
+    span {
+      font-size: 16px;
+      align-self: center;
+      font-weight: 400;
+    }
+
+    >img {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+    }
+  }
+
+  &-caret {
+    z-index: 100;
+    transition: .3s;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-image: url(../../public/caret_down.svg);
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    top: 15px;
+    right: 15px;
+    background-size: contain;
+
+    @media screen and (max-width: 1230px) {
+      top: 14px;
+    }
+
+    &_open {
+      background-image: url(../../public/exit-icon.svg);
+      top: 20px;
+      width: 15px;
+      height: 15px;
+    }
+
+    &_mobile {
+      top: 14px;
+      right: 40px;
+
+      &-open {
+        right: -85px;
+
+        @media screen and (max-width: 360px) {
+          right: -70px;
+          top: 17px;
+          width: 14px;
+          height: 13px;
+        }
+      }
+    }
+  }
+}

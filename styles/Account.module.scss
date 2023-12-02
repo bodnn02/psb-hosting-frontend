@@ -1,0 +1,128 @@
+.report {
+  padding: 0;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__card {
+    width: calc(33.3% - 0.75rem);
+    display: flex;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-clip: border-box;
+    border-radius: 7px;
+    box-shadow: 0 4px 25px 0 rgba(168, 180, 208, 0.1);
+    text-align: center;
+    margin: 0 0 1.5rem;
+
+    @media screen and (max-width: 1280px) {
+      width: calc(50% - 0.75rem);
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    &-img {
+      height: 70px;
+      width: 70px;
+      align-self: center;
+      justify-self: center;
+      border-radius: 25px;
+      margin: 13px;
+      position: relative;
+
+      & iconify-icon {
+        color: #fff;
+        margin-top: 1rem;
+        font-size: 30px;
+      }
+
+      &_balance {
+        background-color: #79c8c2;
+      }
+
+      &_services {
+        background-color: #05c3fb;
+      }
+
+      &_expense {
+        background-color: #f7b731;
+      }
+    }
+
+    &-icon-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      overflow: hidden;
+    }
+
+    &-text {
+      padding: 1rem 1rem 1rem calc(1rem + 0.75rem);
+      text-align: left;
+    }
+
+    &-title {
+      margin: 0.5rem 0;
+      font-weight: 700;
+      font-size: 1.75rem;
+    }
+
+    &-description {
+      font-size: 1.125rem;
+      font-weight: 400;
+    }
+  }
+}
+
+.goods {
+  padding: 0;
+
+  &__title {
+    margin-bottom: 0.66em;
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 32px;
+    row-gap: 24px;
+
+    @media screen and (max-width: 1560px) {
+      margin-left: 12px;
+      column-gap: 12px;
+      row-gap: 12px;
+    }
+
+    @media screen and (max-width: 1330px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 1080px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 860px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    @media screen and (max-width: 680px) {
+      margin-left: 0;
+    }
+
+    @media screen and (max-width: 530px) {
+      row-gap: 32px;
+    }
+  }
+}

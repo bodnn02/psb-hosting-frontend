@@ -1,0 +1,303 @@
+.title {
+  padding-bottom: 24px;
+
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  @media screen and (max-width: 1180px) {
+    text-align: center;
+  }
+}
+
+.products {
+  display: grid;
+  row-gap: 48px;
+  column-gap: 5.8%;
+  grid-template-columns: 308px auto;
+
+  @media screen and (max-width: 1345px) {
+    grid-template-columns: 280px auto;
+  }
+
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  position: relative;
+
+  &Title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #888;
+    padding-left: 10px;
+  }
+
+  &Container {
+    background: #F5F6F7;
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  &Search {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000;
+    padding: 8px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    width: 100%;
+
+    &::placeholder {
+      color: #000;
+    }
+  }
+
+  @media screen and (max-width: 1280px) {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+}
+
+.countryList {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding: 8px;
+
+  &::after {
+    content: '';
+    background-image: url(../public/chevron-down.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    height: 20px;
+    position: absolute;
+    right: 16px;
+    top: 9px;
+    transform: rotate(0deg);
+    transition: transform .2s linear;
+    cursor: pointer;
+  }
+
+  &Open {
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.flag {
+  width: 28px;
+  height: 20px;
+}
+
+.country {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.filtersList {
+  display: none;
+  grid-template-columns: auto auto;
+  column-gap: 6px;
+  row-gap: 15px;
+  width: 100%;
+  padding: 10px;
+  background: #FFFFFF;
+  box-shadow: 0px 5px 25px rgba(71, 71, 71, 0.25);
+  border-radius: 8px;
+  position: absolute;
+  z-index: 10000;
+  top: 178px;
+  left: 0;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1280px) {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  @media screen and (max-width: 550px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 16px 16px;
+  }
+
+  @media screen and (max-width: 370px) {
+    column-gap: 0;
+    padding: 30px 8px 8px;
+  }
+
+  &Open {
+    display: grid;
+
+    @media screen and (max-width: 1279px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media screen and (max-width: 550px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+.countryItem {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  padding: 4px;
+  border-radius: 2px;
+
+  &Active {
+    background: #4E9AA5;
+    color: #FFFFFF;
+  }
+}
+
+.amount {
+  font-weight: 400;
+  font-size: 14px;
+  color: #888;
+  margin-left: 20px;
+}
+
+.button {
+  padding: 12px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 20px;
+  color: #4E9AA5;
+  border: 1px solid #4E9AA5;
+  border-radius: 8px;
+  background-color: transparent;
+  cursor: pointer;
+
+  @media screen and (max-width: 1180px) {
+    width: 280px;
+    align-self: center;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.vpnList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+
+  @media screen and (max-width: 1280px) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+}
+
+.rowTable {
+  width: 100px;
+}
+
+.overlay {
+  @media screen and (max-width: 550px) {
+    position: fixed;
+    z-index: 9999;
+    background-color: #000;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+
+  &Visible {
+    @media screen and (max-width: 550px) {
+      display: block;
+    }
+  }
+}
+
+.buttonClose {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-image: url(../public/button-close.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 15px;
+  right: 12px;
+  display: none;
+
+  @media screen and (max-width: 550px) {
+    display: block;
+  }
+}
+
+.main-title {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+  font-weight: 700;
+}
+
+.blockTitle {
+  justify-self: center;
+  text-align: center;
+}
+
+.textOne {
+  @media screen and (max-width: 1050px) {
+    width: 170px;
+  }
+}
+
+.faq {
+  &__list {
+    background-color: #F5F6F7;
+    border-radius: 18px;
+    padding: 42px 32px;
+    row-gap: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    text-align: center;
+    padding-bottom: 32px;
+  }
+}
+
+.advantagesItem {
+  width: 273px;
+}
+
+.mainPage {
+  padding-bottom: 0;
+}

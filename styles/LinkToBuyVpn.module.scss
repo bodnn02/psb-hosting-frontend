@@ -1,0 +1,65 @@
+.about__wrapper {
+  &-icons {
+    padding: 20px 0;
+    gap: 10px;
+    display: flex;
+
+    &-hidden {
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
+    }
+  }
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      padding: 10px;
+      border-radius: 10%;
+      border: 1px solid #4e9aa5;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+    }
+
+    &_vpn {
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  &-btn {
+    background: #4e9aa5;
+    color: #fff;
+    transition: .2s ease-in-out;
+    font-weight: 400;
+    font-size: 19.2px;
+    line-height: normal;
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+
+    a {
+      display: block;
+      padding: 8px 20px;
+      font-weight: 400;
+      font-size: 19.2px;
+      line-height: normal;
+
+      &:hover {
+        background: #6cd3e3;
+      }
+    }
+
+    &-vpn {
+      @media screen and (max-width: 1024px) {
+        margin-top: 32px;
+      }
+    }
+  }
+}

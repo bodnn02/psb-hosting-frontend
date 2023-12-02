@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@marsidev/react-turnstile": "^0.2.3",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/node": "^20.2.0",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@types/styled-components": "^5.1.26",
+    "cookie": "^0.5.0",
+    "iconify-icon": "^1.0.7",
+    "jsondiffpatch": "^0.4.1",
+    "next": "latest",
+    "next-i18next": "^14.0.0",
+    "next-images": "^1.8.5",
+    "next-redux-wrapper": "^8.1.0",
+    "ni18n": "^1.1.0",
+    "react": "18.2.0",
+    "react-burger-menu": "^3.0.9",
+    "react-dom": "18.2.0",
+    "react-range-slider-input": "^3.0.7",
+    "react-redux": "^8.0.5",
+    "react-swipeable": "^7.0.1",
+    "sass": "^1.59.3",
+    "scss": "^0.2.4",
+    "swiper": "^9.4.1",
+    "typescript": "^5.0.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

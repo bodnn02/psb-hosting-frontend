@@ -1,0 +1,45 @@
+.popup {
+  position: fixed;
+  top: 15px;
+  right: 5%;
+  display: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: unset;
+  background-color: #efc3c4;
+  color: #ad686a;
+  z-index: 100000;
+  overflow: hidden;
+
+  &_open::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    width: 3px;
+    height: 100%;
+  
+    background-color: #9b4746;
+  }
+
+  &_open {
+    display: flex;
+  }
+
+  &__message {
+    display: flex;
+    font-size: 14px;
+  }
+
+  &_success {
+    background-color: #c8f3d7;
+    color: #85bf97;
+  }
+  &_success::before {
+    background-color: #70b286;
+  }
+}

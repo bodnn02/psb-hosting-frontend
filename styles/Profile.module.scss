@@ -1,0 +1,134 @@
+.formContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 96px;
+
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  @media screen and (max-width: 930px) {
+    gap: 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 308px;
+
+  &__title {
+    font-size: 1.75rem;
+    padding-bottom: 0.66em;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  &__label {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 0.475rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4d5875;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e9edf4;
+    border-radius: 7px;
+    margin-top: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__error {
+    color: #e82646;
+    visibility: hidden;
+    min-height: 20px;
+    font-size: 13px;
+    display: inline-block;
+
+    &_active {
+      visibility: visible;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    color: #74829c;
+    background-color: transparent;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    width: 104px;
+    border: 1px solid #e9edf4;
+    border-radius: 7px;
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  &__list {
+    margin-bottom: 1em;
+
+    & li {
+      font-size: 14px;
+    }
+  }
+
+  &__details {
+    /*grid-column: 1 / 3;
+    grid-row: 1 / 2;*/
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0 0 0;
+      /*border: 1px solid #e9edf4;*/
+      color: #212529;
+      width: 100%;
+      /*font-size: 14px;*/
+      align-items: center;
+    }
+  }
+
+  &__order-item {
+    display: flex;
+    max-width: 308px;
+    margin-top: 8px;
+    padding: 15px 19px;
+    border-radius: 8px;
+    border: 1px solid #e1e1e1;
+    row-gap: 24px;
+  }
+
+  &__text-black {
+    border: none;
+    color: #000;
+    font-size: 16px;
+    overflow: hidden;
+  }
+
+  &__options-button,
+  &__options-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 19px;
+    margin-bottom: 32px;
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #4e9aa5;
+  }
+}

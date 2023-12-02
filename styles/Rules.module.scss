@@ -1,0 +1,43 @@
+.rules {
+  padding: 25px;
+
+  &__title {
+    margin-bottom: 1em;
+  }
+
+  &__list-wrap {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e9edf4;
+    border-radius: 3px 3px 0 0;
+  }
+
+  &__list {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    border-left: 2px solid #e9edf4;
+
+    & li {
+      margin-bottom: 1rem;
+    }
+
+    & li::before {
+      content: '- ';
+    }
+
+    & li:nth-last-child(2) {
+      margin-bottom: 0;
+    }
+
+    &-cite {
+      font-size: 80%;
+      color: #868e96;
+    }
+
+    &-cite::before {
+      display: none;
+    }
+  }
+}
