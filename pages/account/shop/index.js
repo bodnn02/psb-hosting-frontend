@@ -90,9 +90,9 @@ export default function AccountVps() {
 
       // Добавляем объект "Price" только если есть хотя бы один параметр
       if (hasParameters) {
-        const totalPrice = product.price + t('new-service-subscribe-price');
+        const totalPrice = product.price + '$';
         sortedCharacters.push({
-          name: 'Price',
+          name: t('new-service-subscribe-price'),
           value: totalPrice,
         });
       }
