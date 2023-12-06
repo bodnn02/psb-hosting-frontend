@@ -718,7 +718,7 @@ const Order = (id) => {
               isOpen={isChangeSystemPopupOpen}
               onClose={closeAllPopups}
               onUpdateSystem={changeSystemFormSubmit}
-              buttonText={t("popup-button-choose")}
+              buttonText={t("popup-button-choose-system")}
               disabled={/*serverOff ? true :*/ false}
             />
           )}
