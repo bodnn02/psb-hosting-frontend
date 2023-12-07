@@ -10,7 +10,12 @@ import { fetchUser } from "../../store/slices/user";
 import { useAppDispatch } from "../../store/hooks";
 import MessagePopup from "../MessagePopup/MessagePopup";
 import OrderCard from "../OrderCard/OrderCard";
-import server from "../../public/server.svg";
+import server_bulletproof from "../../public/server_bulletproof.svg";
+import server_vpn from "../../public/server_vpn.svg";
+import server_vps from "../../public/server_vps.svg";
+import Renewal from "../Renewal/Renewal";
+import Image from "next/image";
+
 
 import style from "../../styles/OrderCard.module.scss";
 
@@ -80,98 +85,99 @@ const OrderCardPending = ({ order }) => {
   }, [order]);
 
   return (
-    <OrderCard order={order} />
-    /*<li className={style["card"]}>
-      <Link
-        href={`/account/profile/order/${id}`}
-        className={style["card__header-link"]}
-      >
-        <img
-          src="/server.png"
-          alt="icon server"
-          className={style["card__img"]}
-        />
-      </Link>
-      <div className={style["card__body"]}>
-        <h3 className={style["card__title"]}>{status}</h3>
-        <ul className={style["card__list"]}>
-          <li className={style["card__item"]}>
-            {t("order-status")}&nbsp;
-            <span
-              className={`${style["card__status"]} ${style["card__status_orange"]}`}
-            >
-              {status}
-            </span>
-          </li>
-          <li className={style["card__item"]}>
-            {`${t("order-number")} ${order_id}`}
-          </li>
-          <li className={style["card__item"]}>
-            {`${t("order-name")} ${title}`}
-          </li>
-          <li className={style["card__item"]}>
-            {t("order-renewal")}&nbsp;
-            <span
-              className={
-                auto_refresh
-                  ? style["card__text-success"]
-                  : style["card__text-denger"]
-              }
-            >
-              {auto_refresh ? t("auto-refresh-true") : t("auto-refresh-false")}
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <div className={style["card__footer"]}>
-        {!isPaid && paySys === "Cryptocloud" && (
+    <>
+      <div className={style["card"]}>
+        <div className={style["card__header"]}>
           <Link
-            className={style["card__button-pay"]}
-            href={`https://pay.cryptocloud.plus/${bill_id}`}
+            href={`/account/profile/order/${order.id}`}
+            className={style["card__header-link"]}
           >
-            <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
-            &nbsp;{t("order-pay")}
+            <Image alt="server" src={
+              order.type === 'VPS'
+                ? server_vps
+                : order.type === 'VPN'
+                  ? server_vpn
+                  : order.type === 'Bulletproof'
+                    ? server_bulletproof
+                    : ''
+            } width={48} height={48} />
           </Link>
-        )}
-        {!isPaid && paySys === "LAVA" && (
-          <Link
-            className={style["card__button-pay"]}
-            href={`https://pay.lava.ru/invoice/${bill_id}`}
-          >
-            <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
-            &nbsp;{t("order-pay")}
-          </Link>
-        )}
-        {!isPaid && paySys === "Cryptomus" && (
-          <Link
-            className={style["card__button-pay"]}
-            href={`https://pay.cryptomus.com/pay/${bill_id}`}
-          >
-            <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
-            &nbsp;{t("order-pay")}
-          </Link>
-        )}
-        {status === "Заблокирован за неуплату" && (
-          <button
-            className={style["card__button-pay"]}
-            onClick={fetchDataBlocked}
-            type="button"
-            disabled={!activeButton}
-          >
-            <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
-            &nbsp;{t("order-pay")}
-          </button>
-        )}
-        <Link
-          className={style["card__button-link"]}
-          href="https://t.me/psbhosting"
+          <div className={style["card__header-info"]}>
+            <h3 className={style["card__title"]}>
+              <Link
+                href={`/account/profile/order/${order.id}`}
+                className={style["card__link"]}
+              >
+                {order.title}
+              </Link>
+            </h3>
+            <div className={style["card__priceSection"]}>
+              <p className={style["card__itemTitle"]}> {t("order-price")} </p>
+              <p className={style["card__card__itemData"]}>
+                &nbsp;{`${order.price}$/${t("order-price-period")}`}
+              </p>
+            </div>
+          </div>
+        </div>
+        <p
+          className={`${style["card__status"]} ${order.status === "Заказ выдан"
+            ? style["card__status_green"]
+            : order.status === "Заблокирован за неуплату"
+              ? style["card__status_red"]
+              : style["card__status_blue"]
+            }`}
         >
-          <iconify-icon icon="ion:rocket-outline"></iconify-icon>
-          &nbsp;{t("order-support")}
-        </Link>
+          {order.status === "Заказ выдан"
+            ? t("order-status-issued")
+            : order.status === "Заблокирован за неуплату"
+              ? t("order-status-blocked")
+              : order.status === "Обработка заказа"
+                ? t("order-status-awaiting-issue")
+                : null}
+        </p>
+        <p className={style["card__nameService"]}>{`${order.type}`}</p>
+        <Renewal date_end={order.date_end}></Renewal>
+        <div className={style["card__footer"]}>
+          {!isPaid && paySys === "Cryptocloud" && (
+            <Link
+              className={style["card__button-pay"]}
+              href={`https://pay.cryptocloud.plus/${bill_id}`}
+            >
+              <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
+              &nbsp;{t("order-pay")}
+            </Link>
+          )}
+          {!isPaid && paySys === "LAVA" && (
+            <Link
+              className={style["card__button-pay"]}
+              href={`https://pay.lava.ru/invoice/${bill_id}`}
+            >
+              <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
+              &nbsp;{t("order-pay")}
+            </Link>
+          )}
+          {!isPaid && paySys === "Cryptomus" && (
+            <Link
+              className={style["card__button-pay"]}
+              href={`https://pay.cryptomus.com/pay/${bill_id}`}
+            >
+              <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
+              &nbsp;{t("order-pay")}
+            </Link>
+          )}
+          {status === "Заблокирован за неуплату" && (
+            <button
+              className={style["card__button-pay"]}
+              onClick={fetchDataBlocked}
+              type="button"
+              disabled={!activeButton}
+            >
+              <iconify-icon icon="mdi-light:credit-card"></iconify-icon>
+              &nbsp;{t("order-pay")}
+            </button>
+          )}
+        </div>
       </div>
-
       <MessagePopup
         message={message}
         isOpen={isPopupOpen}
@@ -179,7 +185,7 @@ const OrderCardPending = ({ order }) => {
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
       />
-    </li>*/
+    </>
   );
 };
 

@@ -68,7 +68,7 @@ export default function AccountVps() {
   const [systems, setSystems] = useState([]);
   const availablePaymentTypes = [
     { id: 1, name: t('new-service-balance'), icon: '/Suitcase.svg', },
-    { id: 2, name: t('new-service-card-b'), icon: '/Cloud.svg' },
+    { id: 4, name: t('new-service-card-b'), icon: '/Cloud.svg' },
     { id: 3, name: t('new-service-card-l'), icon: '/ion_card-outline.svg' },
   ]
 

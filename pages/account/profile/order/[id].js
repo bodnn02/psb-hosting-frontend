@@ -334,13 +334,13 @@ const Order = (id) => {
                   className={`${style["order__details"]} ${style["card"]}`}
                 >
                   <h2 className={style["order__main-title"]}>
-                    {currentOrder.order[0].title &&
+                    {currentOrder.order[0]?.title &&
                       `${t("profile-order")} на аренду сервера ${currentOrder.order[0].title
                       }`}
                   </h2>
                   <div className={style["order__details-list"]}>
                     <ul className={style["order__order-item"]}>
-                      {currentOrder.order[0].order_id && (
+                      {currentOrder.order[0]?.order_id && (
                         <li className={style["order__details-item"]}>
                           <div className={style["order__configuration"]}>
                             <div className={style["order__configuration_info"]}>
@@ -410,7 +410,7 @@ const Order = (id) => {
                     </ul>
 
                     <ul className={style["order__order-item"]}>
-                      {currentOrder.order[0].os && (
+                      {currentOrder.order[0]?.os && (
                         <li className={style["order__details-item"]}>
                           <div className={style["order__configuration"]}>
                             <div className={style["order__configuration_info"]}>
@@ -427,7 +427,7 @@ const Order = (id) => {
                         </li>
                       )}
 
-                      {currentOrder.order_data[0].ip && (
+                      {currentOrder.order_data[0]?.ip && (
                         <li className={style["order__details-item"]}>
                           <div className={style["order__configuration"]}>
                             <div className={style["order__configuration_info"]}>
@@ -456,13 +456,13 @@ const Order = (id) => {
                       )}
                     </ul>
                   </div>
-                  {currentOrder.order[0].title &&
+                  {currentOrder.order[0]?.title &&
                     currentOrder.order[0].title.includes("RDP") && (
                       <p className={style["order__message"]}>
                         {t("profile-order-rdp")}
                       </p>
                     )}
-                  {currentOrder.order[0].type &&
+                  {currentOrder.order[0]?.type &&
                     !currentOrder.order[0].type.includes("Bulletproof") &&
                     !currentOrder.order[0].type.includes("Hosting") &&
                     currentOrder.order[0].os.includes("Windows") && (

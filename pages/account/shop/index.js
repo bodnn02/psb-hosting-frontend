@@ -63,7 +63,7 @@ export default function AccountVps() {
   const [systems, setSystems] = useState([]);
   const availablePaymentTypes = [
     { id: 1, name: t('new-service-balance'), icon: '/Suitcase.svg', },
-    { id: 2, name: t('new-service-card-b'), icon: '/Cloud.svg' },
+    { id: 4, name: t('new-service-card-b'), icon: '/Cloud.svg' },
     { id: 3, name: t('new-service-card-l'), icon: '/ion_card-outline.svg' },
   ]
   const [controlPanels, setControlPanels] = useState([]);
@@ -110,7 +110,12 @@ export default function AccountVps() {
     setSelectedConfig(config);
     var filteredProduct = vdsVps.filter((product) => product.id === config[4].product_id)[0];
 
-    var productControlPanels = filteredProduct.control_panel
+    var productControlPanels = filteredProduct.control_panel.map(item => {
+      return {
+        ...item,
+        name: `${item.name} ${item.price}$`
+      };
+    });
 
     setSelectedSystem(null);
     setSystems(filteredProduct.os);
@@ -164,7 +169,7 @@ export default function AccountVps() {
     }
     else {
       const token = typeof window !== 'undefined' && localStorage.getItem('token');
-      const queries = `product_id=${selectedConfig[4].product_id}&payment_type=${selectedPayment.id}&os=${selectedSystem.versions.find(item => item.version === selectedVersion[selectedSystem.id]).content}&control_panel=${selectedControlPanel.id}`;
+      const queries = `product_id=${selectedConfig[4].product_id}&payment_type=${selectedPayment.id}&os=${selectedSystem.versions.find(item => item.version === selectedVersion[selectedSystem.id]).content}&control_panel=${selectedControlPanel.content}`;
 
       setMessage(t('error-pending'));
       setIsSuccess(true);
@@ -256,7 +261,7 @@ export default function AccountVps() {
                   <h2 className={style['order-section__h2']}>3. {t('new-service-panel')}</h2>
                 </div>
                 <div className={style['order-section__content']}>
-                <TypesList types={controlPanels} selectedType={selectedControlPanel} onSelect={handleControlPanelSelect} />
+                  <TypesList types={controlPanels} selectedType={selectedControlPanel} onSelect={handleControlPanelSelect} />
                 </div>
               </section>
             )}
@@ -309,8 +314,20 @@ export default function AccountVps() {
                 <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.name : ""}</p>
               </div>
               <div className={style['order-summary__item']}>
+                <h3 className={style['order-summary__h3']}>{t('new-service-panel')}</h3>
+                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.price : ""}</p>
+              </div>
+              <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-payment')}</h3>
                 <p className={style['order-summary__p']}>{selectedPayment ? selectedPayment.name : ""}</p>
+              </div>
+              <div className={style['order-summary__item']}>
+                <h3 className={style['order-summary__h3']}>{t('new-service-summary')}</h3>
+                <p className={style['order-summary__p']}>
+                  {selectedConfig && selectedControlPanel ? (
+                    (parseFloat(selectedConfig[3].value) + parseFloat(selectedControlPanel.price)).toFixed(2)
+                  ) : ""}
+                </p>
               </div>
             </div>
             <div className={`${style['order-summary__button']}`} onClick={() => sentDataToOrder(selectedPayment?.id)}>{t('new-service-button')}</div>
