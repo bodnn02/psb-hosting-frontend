@@ -67,7 +67,7 @@ export default function AccountVps() {
 
         // Добавляем объект "Price" только если есть хотя бы один параметр
         if (hasParameters) {
-          const totalPrice = product.price + ' $/Month';
+          const totalPrice = product.price + ' $';
           sortedCharacters.push({
             name: t('new-service-price'),
             value: totalPrice,
