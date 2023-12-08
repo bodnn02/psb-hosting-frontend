@@ -319,6 +319,16 @@ export default function AccountVps() {
                 <p className={style['order-summary__p']}>{selectedPayment ? selectedPayment.name : ""}</p>
               </div>
             </div>
+            <div className={style['order-summary__header']}>
+              <h2 className={style['order-summary__h2']}>{t('new-service-summary')} </h2>
+              <p className={style['order-summary__p']}>
+                <b>
+                  {selectedConfig ? (
+                    (parseFloat(selectedConfig[3].value)).toFixed(2) + " $"
+                  ) : ""}
+                </b>
+              </p>
+            </div>
             <div className={`${style['order-summary__button']}`} onClick={() => sentDataToOrder(selectedPayment?.id)}>{t('new-service-button')}</div>
           </div>
         </div>

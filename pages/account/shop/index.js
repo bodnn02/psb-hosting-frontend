@@ -258,7 +258,7 @@ export default function AccountVps() {
             {selectedConfig !== null && (
               <section className={style['order-section']}>
                 <div className={style['order-section__header']}>
-                  <h2 className={style['order-section__h2']}>3. {t('new-service-panel')}</h2>
+                  <h2 className={style['order-section__h2']}>4. {t('new-service-panel')}</h2>
                 </div>
                 <div className={style['order-section__content']}>
                   <TypesList types={controlPanels} selectedType={selectedControlPanel} onSelect={handleControlPanelSelect} />
@@ -267,7 +267,7 @@ export default function AccountVps() {
             )}
             <section className={style['order-section']}>
               <div className={style['order-section__header']}>
-                <h2 className={style['order-section__h2']}>4. {t('new-service-payment')}</h2>
+                <h2 className={style['order-section__h2']}>5. {t('new-service-payment')}</h2>
 
               </div>
               <div className={style['order-section__content']}>
@@ -276,9 +276,6 @@ export default function AccountVps() {
             </section>
           </div>
           <div className={style['order-summary']}>
-            <div className={style['order-summary__header']}>
-              <h2 className={style['order-summary__h2']}>{t('new-service-summary')}</h2>
-            </div>
             <div className={style['order-summary__content']}>
               {/* Отображение выбранных параметров */}
               <div className={style['order-summary__item']}>
@@ -311,24 +308,26 @@ export default function AccountVps() {
               </div>
               <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-panel')}</h3>
-                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.name : ""}</p>
+                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.title : ""}</p>
               </div>
               <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-panel')}</h3>
-                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.price : ""}</p>
+                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.price + "$" : ""}</p>
               </div>
               <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-payment')}</h3>
                 <p className={style['order-summary__p']}>{selectedPayment ? selectedPayment.name : ""}</p>
               </div>
-              <div className={style['order-summary__item']}>
-                <h3 className={style['order-summary__h3']}>{t('new-service-summary')}</h3>
-                <p className={style['order-summary__p']}>
+            </div>
+            <div className={style['order-summary__header']}>
+              <h2 className={style['order-summary__h2']}>{t('new-service-summary')} </h2>
+              <p className={style['order-summary__p']}>
+                <b>
                   {selectedConfig && selectedControlPanel ? (
-                    (parseFloat(selectedConfig[3].value) + parseFloat(selectedControlPanel.price)).toFixed(2)
+                    (parseFloat(selectedConfig[3].value) + parseFloat(selectedControlPanel.price)).toFixed(2) + " $"
                   ) : ""}
-                </p>
-              </div>
+                </b>
+              </p>
             </div>
             <div className={`${style['order-summary__button']}`} onClick={() => sentDataToOrder(selectedPayment?.id)}>{t('new-service-button')}</div>
           </div>

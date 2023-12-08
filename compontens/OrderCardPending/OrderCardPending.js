@@ -97,7 +97,7 @@ const OrderCardPending = ({ order }) => {
                 ? server_vps
                 : order.type === 'VPN'
                   ? server_vpn
-                  : order.type === 'Bulletproof'
+                  : order.type.includes('Bulletproof')
                     ? server_bulletproof
                     : ''
             } width={48} height={48} />
@@ -123,17 +123,19 @@ const OrderCardPending = ({ order }) => {
           className={`${style["card__status"]} ${order.status === "Заказ выдан"
             ? style["card__status_green"]
             : order.status === "Заблокирован за неуплату"
-              ? style["card__status_red"]
-              : style["card__status_blue"]
+            ? style["card__status_red"]
+            : style["card__status_blue"]
             }`}
         >
           {order.status === "Заказ выдан"
             ? t("order-status-issued")
             : order.status === "Заблокирован за неуплату"
-              ? t("order-status-blocked")
-              : order.status === "Обработка заказа"
-                ? t("order-status-awaiting-issue")
-                : null}
+            ? t("order-status-blocked")
+            : order.status === "Обработка заказа" && isPaid
+            ? t("order-status-awaiting-issue")
+            : order.status === "Обработка заказа" && !isPaid
+            ? t("order-status-awaiting-payment")
+            : null}
         </p>
         <p className={style["card__nameService"]}>{`${order.type}`}</p>
         <Renewal date_end={order.date_end}></Renewal>

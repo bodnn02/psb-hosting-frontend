@@ -109,21 +109,25 @@ const Order = (id) => {
 
   const fetchProducts = async () => {
     try {
-      const productsData = await getProducts(currentOrder.type, '/api/getProducts');
+      const productsData = await getProducts(currentOrder.order[0].type.toUpperCase(), '/api/getProducts');
       const fetchedProducts = productsData?.products || [];
-      var filteredProducts = fetchedProducts.filter((product) => product.country === currentOrder.order[0].product.country);
-      dispatch(setProducts(filteredProducts));
+      setProducts(fetchedProducts);
     } catch (error) {
       console.error('Error fetching VPS data:', error);
     }
   };
 
 
-  // useEffect(() => {
-  //   if (!products || products.length === 0) {
-  //     fetchProducts();
-  //   }
-  // }, [products]);
+  useEffect(() => {
+    if (
+        currentOrder?.order &&
+        currentOrder.order.length > 0 &&
+        currentOrder.order[0].type &&
+        (!products || products.length === 0)
+    ) {
+        fetchProducts();
+    }
+}, [products, currentOrder]);
 
   const changeSystemFormSubmit = async (dataSystem) => {
     const token =
@@ -339,8 +343,9 @@ const Order = (id) => {
                       }`}
                   </h2>
                   <div className={style["order__details-list"]}>
-                    <ul className={style["order__order-item"]}>
-                      {currentOrder.order[0]?.order_id && (
+                    {currentOrder.order[0]?.order_id && (
+                      <ul className={style["order__order-item"]}>
+
                         <li className={style["order__details-item"]}>
                           <div className={style["order__configuration"]}>
                             <div className={style["order__configuration_info"]}>
@@ -357,104 +362,122 @@ const Order = (id) => {
                             />
                           </div>
                         </li>
-                      )}
-                    </ul>
 
-                    <ul className={style["order__order-item"]}>
-                      {currentOrder.order_data[0]?.superuser && (
-                        <li className={style["order__details-item"]}>
-                          <p className={style["order__text-grey"]}>
-                            {t("profile-order-user")}&nbsp;
-                          </p>
-                          <p className={style["order__text-black"]}>
-                            {currentOrder.order_data[0].superuser}
-                          </p>
-                        </li>
-                      )}
-                      {currentOrder.order_data[0]?.password && (
-                        <li className={style["order__details-item"]}>
-                          <p className={style["order__text-grey"]}>
-                            {t("profile-order-password")}&nbsp;
-                          </p>
-
-                          <input
-                            className={style["order__text-black"]}
-                            type={showPassword ? "" : "text"}
-                            readOnly
-                            value={
-                              !showPassword
-                                ? currentOrder.order_data[0].password.replace(
-                                  /./g,
-                                  "*"
-                                )
-                                : currentOrder.order_data[0].password
-                            }
-                          />
-                          <div className={style["order__button-eye"]}>
-                            <iconify-icon
-                              className={style["order__button-icon"]}
-                              icon={
-                                showPassword
-                                  ? "basil:eye-closed-outline"
-                                  : "basil:eye-outline"
-                              }
-                              onClick={() => setShowPassword(!showPassword)}
-                            ></iconify-icon>
-                          </div>
-                          <ButtonIcon
-                            icon={"ci:edit-pencil-01"}
-                            handleClick={handleChangePasswordOS}
-                          />
-                        </li>
-                      )}
-                    </ul>
-
-                    <ul className={style["order__order-item"]}>
-                      {currentOrder.order[0]?.os && (
-                        <li className={style["order__details-item"]}>
-                          <div className={style["order__configuration"]}>
-                            <div className={style["order__configuration_info"]}>
-                              <p className={style["order__text-grey"]}>OC:</p>
-                              <p className={style["order__text-black"]}>
-                                &nbsp;{currentOrder.order[0].os}
+                      </ul>
+                    )}
+                    {(
+                      currentOrder.order_data[0]?.superuser ||
+                      currentOrder.order_data[0]?.password ||
+                      currentOrder.order_data[0]?.port
+                    ) && (
+                        <ul className={style["order__order-item"]}>
+                          {currentOrder.order_data[0]?.superuser && (
+                            <li className={style["order__details-item"]}>
+                              <p className={style["order__text-grey"]}>
+                                {t("profile-order-user")}&nbsp;
                               </p>
-                            </div>
-                            <ButtonIcon
-                              icon={"mingcute:settings-3-line"}
-                              handleClick={handleChangeSystem}
-                            />
-                          </div>
-                        </li>
-                      )}
-
-                      {currentOrder.order_data[0]?.ip && (
-                        <li className={style["order__details-item"]}>
-                          <div className={style["order__configuration"]}>
-                            <div className={style["order__configuration_info"]}>
-                              <p className={style["order__text-grey"]}>IP: </p>
                               <p className={style["order__text-black"]}>
-                                &nbsp;{currentOrder.order_data[0].ip}
+                                {currentOrder.order_data[0].superuser}
                               </p>
-                            </div>
-                            <ButtonIcon
-                              icon={"tabler:copy"}
-                              handleClick={handleCopyIPToClipboard}
-                            />
-                          </div>
-                        </li>
-                      )}
+                            </li>
+                          )}
+                          {currentOrder.order_data[0]?.password &&
+                            (!currentOrder.order[0]?.type ||
+                              (!currentOrder.order[0]?.type.includes('Bulletproof') &&
+                                !currentOrder.order[0]?.type.includes('Hosting'))) && (
+                              <li className={style["order__details-item"]}>
+                                <p className={style["order__text-grey"]}>
+                                  {t("profile-order-password")}&nbsp;
+                                </p>
 
-                      {currentOrder.order_data[0]?.port && (
-                        <li className={style["order__details-item"]}>
-                          <p className={style["order__text-grey"]}>
-                            {t("profile-order-port")}&nbsp;
-                          </p>
-                          <p className={style["order__text-black"]}>
-                            {currentOrder.order_data[0].port}
-                          </p>
-                        </li>
+                                <input
+                                  className={style["order__text-black"]}
+                                  type={showPassword ? "" : "text"}
+                                  readOnly
+                                  value={
+                                    !showPassword
+                                      ? currentOrder.order_data[0].password.replace(
+                                        /./g,
+                                        "*"
+                                      )
+                                      : currentOrder.order_data[0].password
+                                  }
+                                />
+                                <div className={style["order__button-eye"]}>
+                                  <iconify-icon
+                                    className={style["order__button-icon"]}
+                                    icon={
+                                      showPassword
+                                        ? "basil:eye-closed-outline"
+                                        : "basil:eye-outline"
+                                    }
+                                    onClick={() => setShowPassword(!showPassword)}
+                                  ></iconify-icon>
+                                </div>
+                                <ButtonIcon
+                                  icon={"ci:edit-pencil-01"}
+                                  handleClick={handleChangePasswordOS}
+                                />
+                              </li>
+                            )}
+                        </ul>
                       )}
-                    </ul>
+                    {(
+                      currentOrder.order[0]?.os ||
+                      currentOrder.order_data[0]?.ip ||
+                      currentOrder.order_data[0]?.port
+                    ) && (
+                        <ul className={style["order__order-item"]}>
+                          {currentOrder.order[0]?.os && (
+                              <li className={style["order__details-item"]}>
+                                <div className={style["order__configuration"]}>
+                                  <div className={style["order__configuration_info"]}>
+                                    <p className={style["order__text-grey"]}>OC:</p>
+                                    <p className={style["order__text-black"]}>
+                                      &nbsp;{currentOrder.system.find(item => item.content === currentOrder.order[0].os).name}
+                                    </p>
+                                  </div>
+                                  {(!currentOrder.order[0]?.type ||
+                                   (!currentOrder.order[0]?.type.includes('Bulletproof') &&
+                                    !currentOrder.order[0]?.type.includes('Hosting'))) && (
+                                    <ButtonIcon
+                                      icon={"mingcute:settings-3-line"}
+                                      handleClick={handleChangeSystem}
+                                    />
+                                  )}
+                                </div>
+                              </li>
+                            )}
+
+                          {currentOrder.order_data[0]?.ip && (
+                            <li className={style["order__details-item"]}>
+                              <div className={style["order__configuration"]}>
+                                <div className={style["order__configuration_info"]}>
+                                  <p className={style["order__text-grey"]}>IP: </p>
+                                  <p className={style["order__text-black"]}>
+                                    &nbsp;{currentOrder.order_data[0].ip}
+                                  </p>
+                                </div>
+                                <ButtonIcon
+                                  icon={"tabler:copy"}
+                                  handleClick={handleCopyIPToClipboard}
+                                />
+                              </div>
+                            </li>
+                          )}
+
+                          {currentOrder.order_data[0]?.port && (
+                            <li className={style["order__details-item"]}>
+                              <p className={style["order__text-grey"]}>
+                                {t("profile-order-port")}&nbsp;
+                              </p>
+                              <p className={style["order__text-black"]}>
+                                {currentOrder.order_data[0].port}
+                              </p>
+                            </li>
+                          )}
+                        </ul>
+                      )}
                   </div>
                   {currentOrder.order[0]?.title &&
                     currentOrder.order[0].title.includes("RDP") && (
@@ -466,7 +489,7 @@ const Order = (id) => {
                     !currentOrder.order[0].type.includes("Bulletproof") &&
                     !currentOrder.order[0].type.includes("Hosting") &&
                     currentOrder.order[0].os.includes("Windows") && (
-                      <p className={style["order__message"]}>
+                      <p className={style["order__message-hint"]}>
                         {t("profile-order-windows")}
                       </p>
                     )}
@@ -477,29 +500,32 @@ const Order = (id) => {
                   className={`${style["order__options-list"]} ${style["card"]}`}
                 >
                   <ul className={style["order__order-item"]}>
-                    <li className={style["order__configuration"]}>
-                      <h3 className={style["order__section-titleConf"]}>
-                        {t("profile-order-configuration")}
-                      </h3>
-                      <ButtonIcon
-                        icon={"mingcute:settings-3-line"}
-                        handleClick={handleChangeConfig}
-                        disabled={true}
-                      />
-                    </li>
-
-                    <li className={style["order__details-item"]}>
-                      <p className={style["order__text-grey"]}>CPU:&nbsp;</p>
-                      <p className={style["order__text-black"]}>нужны данные</p>
-                    </li>
-                    <li className={style["order__details-item"]}>
-                      <p className={style["order__text-grey"]}>RAM:&nbsp;</p>
-                      <p className={style["order__text-black"]}>нужны данные</p>
-                    </li>
-                    <li className={style["order__details-item"]}>
-                      <p className={style["order__text-grey"]}>SSD:&nbsp;</p>
-                      <p className={style["order__text-black"]}>нужны данные</p>
-                    </li>
+                    {(!currentOrder.order[0]?.type ||
+                     (!currentOrder.order[0]?.type.includes('Bulletproof') &&
+                      !currentOrder.order[0]?.type.includes('Hosting'))) && (
+                        <li className={style["order__configuration"]}>
+                          <h3 className={style["order__section-titleConf"]}>
+                            {t("profile-order-configuration")}
+                          </h3>
+                          <ButtonIcon
+                            icon={"mingcute:settings-3-line"}
+                            handleClick={handleChangeConfig}
+                            disabled={true}
+                          />
+                        </li>
+                      )}
+                    {products && (
+                      products
+                        .filter((product) => product.id === currentOrder.order[0].product)
+                        .map((matchingProduct) =>
+                          matchingProduct.characters.map((character, index) => (
+                            <li key={index} className={style["order__details-item"]}>
+                              <p className={style["order__text-grey"]}>{character.name}: </p>
+                              <p className={style["order__text-black"]}>{character.content}</p>
+                            </li>
+                          ))
+                        )
+                    )}
                     <li className={style["order__details-item"]}>
                       <p className={style["order__text-grey"]}>
                         {t("profile-order-price")}&nbsp;
@@ -531,10 +557,7 @@ const Order = (id) => {
               </>
             )}
           {/*3 КНОПКИ НАЧАЛО*/}
-          {currentOrder.order &&
-            currentOrder.order[0].type &&
-            !currentOrder.order[0].type.includes("Bulletproof") &&
-            !currentOrder.order[0].type.includes("Hosting") && (
+          {currentOrder.order && currentOrder.order[0].type && (
               <section className={`${style["order__settings"]} ${style["card"]}`}>
                 <div>
                   <li className={style["order__details-item"]}>
@@ -542,22 +565,32 @@ const Order = (id) => {
                       {t("profile-order-server")}&nbsp;
                     </p>
                     <p className={
-                        currentOrder.order[0].status === "Включен" ? style["order__text-green"] :
-                        currentOrder.order[0].status === "Выключен" || currentOrder.order[0].status === "Заблокирован" || currentOrder.order[0].status === "Заказ выдан" ? style["order__text-red"] : ''
+                      currentOrder.order[0].status.includes("Включен") ||
+                      currentOrder.order[0].status.includes("выдан")
+                        ? style["order__text-green"]
+                        : currentOrder.order[0].status.includes("Выключен") ||
+                          currentOrder.order[0].status.includes("Заблокирован") ||
+                          currentOrder.order[0].status.includes("Обработка")
+                        ? style["order__text-red"]
+                        : ""
                     }>
-                      {
-                        currentOrder.order[0].status === "Включен" ? t('profile-order-on') :
-                        currentOrder.order[0].status === "Выключен" || currentOrder.order[0].status === "Заказ выдан" ? t('profile-order-off') :
-                        currentOrder.order[0].status === "Заблокирован" ? t('profile-order-blocked') : ''
-                      }
+                      {currentOrder.order[0].status.includes("Включен") ||
+                      currentOrder.order[0].status.includes("выдан")
+                        ? t("profile-order-on")
+                        : currentOrder.order[0].status.includes("Выключен")
+                        ? t("profile-order-off")
+                        : currentOrder.order[0].status.includes("Заблокирован") ||
+                        currentOrder.order[0].status.includes("Обработка")
+                        ? t("profile-order-blocked")
+                        : ""}
                     </p>
                   </li>
                   <div className={style["order__details-buttons"]}>
-                    {currentOrder.order[0].type &&
-                      !currentOrder.order[0].type.includes("Bulletproof") &&
-                      !currentOrder.order[0].type.includes("Hosting") && (
+                    {currentOrder.order[0].type && (
                         <div>
-                          {currentOrder.order[0].status === "Включен" && (
+                          {(currentOrder.order[0].status.includes("Включен") || currentOrder.order[0].status.includes("выдан")) &&
+                          !currentOrder.order[0].type.includes("Bulletproof") &&
+                          !currentOrder.order[0].type.includes("Hosting") && (
                             <div>
                               <BtnWithAction
                                 title={t("profile-order-option-four")}
@@ -573,7 +606,9 @@ const Order = (id) => {
                               />
                             </div>
                           )}
-                          {currentOrder.order[0].status === "Заказ выдан" && (
+                          {currentOrder.order[0].status.includes("Выключен") &&
+                          !currentOrder.order[0].type.includes("Bulletproof") &&
+                          !currentOrder.order[0].type.includes("Hosting") && (
                             <div>
                               <BtnWithAction
                                 title={t("profile-order-option-two")}
@@ -583,20 +618,26 @@ const Order = (id) => {
                               />
                             </div>
                           )}
-                          {currentOrder.order[0].status.includes('Заблокирован') && (
+                          {currentOrder.order[0].status.includes('Заблокирован') ||
+                           currentOrder.order[0].status.includes("Обработка") && (
                             <div>
-                              <BtnWithAction
-                                title={t("profile-order-option-two")}
-                                onClick={handleStartServer}
-                                disabled={true}
-                                icon="ci:play"
-                              />
-                              <BtnWithAction
-                                title={t("profile-order-option-three")}
-                                onClick={handleRestartServer}
-                                disabled={true}
-                                icon="ci:redo"
-                              />
+                            {!currentOrder.order[0].type.includes("Bulletproof") &&
+                             !currentOrder.order[0].type.includes("Hosting") && (
+                              <div>
+                                <BtnWithAction
+                                  title={t("profile-order-option-two")}
+                                  onClick={handleStartServer}
+                                  disabled={true}
+                                  icon="ci:play"
+                                />
+                                <BtnWithAction
+                                  title={t("profile-order-option-three")}
+                                  onClick={handleRestartServer}
+                                  disabled={true}
+                                  icon="ci:redo"
+                                />
+                              </div>
+                            )}
                               <BtnWithLink
                                 href="/account/balance"
                                 title={t("order-pay")}
@@ -713,14 +754,14 @@ const Order = (id) => {
             isSuccess={isSuccess}
             setIsSuccess={setIsSuccess}
           />
-          {currentOrder.type !== 'VPN' && (
-            <PopupChangeSystem
-              isOpen={isChangeSystemPopupOpen}
-              onClose={closeAllPopups}
-              onUpdateSystem={changeSystemFormSubmit}
-              buttonText={t("popup-button-choose-system")}
-              disabled={/*serverOff ? true :*/ false}
-            />
+          {currentOrder && currentOrder.type && currentOrder.type !== 'VPN' && (
+              <PopupChangeSystem
+                  isOpen={isChangeSystemPopupOpen}
+                  onClose={closeAllPopups}
+                  onUpdateSystem={changeSystemFormSubmit}
+                  buttonText={t("popup-button-choose-system")}
+                  disabled={/*serverOff ? true :*/ false}
+              />
           )}
           <PopupChangePasswordOS
             isOpen={isChangePasswordOSPopupOpen}

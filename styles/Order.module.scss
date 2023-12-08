@@ -207,6 +207,21 @@
     }
   }
 
+  &__message-hint {
+    margin-top: 15px;
+    font-size: 0.875rem;
+
+    a {
+      color: #4e9aa5;
+      font-weight: 600;
+      font-size: 0.875rem;
+
+      &:hover {
+        color: #79c8c2;
+      }
+    }
+  }
+
   &__form {
     margin-top: 35px;
     display: flex;

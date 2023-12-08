@@ -25,6 +25,7 @@
   "order-status-issued": "The order has been issued",
   "order-status-blocked": "Blocked for non-payment",
   "order-status-awaiting-issue": "Awaiting issue",
+  "order-status-awaiting-payment": "Awaiting payment",
 
   "order-status": "Status:",
   "order-number": "Number:",

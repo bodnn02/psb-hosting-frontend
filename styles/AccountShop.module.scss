@@ -570,8 +570,18 @@
 .order-summary__header {
   padding: 16px 20px;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   border-radius: 8px;
   background: #F5F6F7;
+}
+.order-summary__header:not(:last-child) {
+  margin-bottom: 15px;
+}
+.order-summary__header .order-summary__p {
+  font-size: 16px;
 }
 .order-summary__h2 {
   color: #000;

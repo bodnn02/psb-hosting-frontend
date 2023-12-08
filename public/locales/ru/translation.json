@@ -31,6 +31,7 @@
   "order-status-issued": "Заказ выдан",
   "order-status-blocked": "Заблокирован за неуплату",
   "order-status-awaiting-issue": "Ожидает выдачи",
+  "order-status-awaiting-payment": "Ожидает оплаты",
 
   "order-price": "Цена:",
   "order-link": "Перейти в заказ",

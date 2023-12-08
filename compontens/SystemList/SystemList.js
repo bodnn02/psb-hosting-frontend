@@ -34,10 +34,22 @@ const SystemList = ({ systems, selectedSystem: propSelectedSystem = null, onSele
 
   const handleSystemClick = (system) => {
     setSelectedSystem(system);
+  
+    // Если ранее не была выбрана версия для этой системы, выбираем первую версию в списке
+    const isFirstVersionSelected = selectedVersion && selectedVersion[system.id] !== undefined && selectedVersion[system.id] !== null;
+    if (!isFirstVersionSelected && system.versions.length > 0) {
+      const firstVersion = system.versions[0].version;
+      setSelectedVersion((prev) => ({ ...prev, [system.id]: firstVersion }));
+      if (onSelectVersion && typeof onSelectVersion === "function") {
+        onSelectVersion(firstVersion, system.id);
+      }
+    }
+  
     if (onSelect && typeof onSelect === "function") {
       onSelect(system, selectedVersion && selectedVersion[system.id]);
     }
   };
+  
 
 
   const handleVersionClick = (version, systemId) => {

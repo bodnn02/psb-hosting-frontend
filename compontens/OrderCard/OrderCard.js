@@ -77,7 +77,7 @@ const OrderCard = ({ order }) => {
             ? server_vps
             : order.type === 'VPN'
             ? server_vpn
-            : order.type === 'Bulletproof'
+            : order.type.includes('Bulletproof')
             ? server_bulletproof
             : ''
             } width={48} height={48} />
