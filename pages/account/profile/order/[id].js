@@ -434,7 +434,7 @@ const Order = (id) => {
                                   <div className={style["order__configuration_info"]}>
                                     <p className={style["order__text-grey"]}>OC:</p>
                                     <p className={style["order__text-black"]}>
-                                      &nbsp;{currentOrder.system.find(item => item.content === currentOrder.order[0].os).name}
+                                      &nbsp;{currentOrder.order[0].os}
                                     </p>
                                   </div>
                                   {(!currentOrder.order[0]?.type ||

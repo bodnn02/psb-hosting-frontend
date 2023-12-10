@@ -97,7 +97,7 @@ const OrderCardPending = ({ order }) => {
                 ? server_vps
                 : order.type === 'VPN'
                   ? server_vpn
-                  : order.type.includes('Bulletproof')
+                  : order.type.includes('Bulletproof') || order.type.includes('hosting')
                     ? server_bulletproof
                     : ''
             } width={48} height={48} />
