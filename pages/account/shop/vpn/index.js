@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import 'iconify-icon';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import Preloader from '../../../../compontens/Preloader/Preloader';
@@ -15,6 +16,9 @@ import { getProducts } from '../../../../api/getProducts';
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { checkBalance } from '../../../../utils/checkBalance';
 import { VPN_PERIOD_EN, VPN_PERIOD_RU } from '../../../../utils/constants';
+
+import { fetchOrders } from '../../../../store/slices/orders';
+import { getOrders } from '../../../../api/getOrders';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -36,6 +40,7 @@ export default function AccountVps() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const user = useAppSelector(store => store.user.user);
+  const router = useRouter();
 
   const fetchData = async () => {
     const data = await getProducts('VPN', '/api/getProducts');

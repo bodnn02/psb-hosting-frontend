@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import 'iconify-icon';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../../compontens/LayoutAccount/LayoutAccount';
 import Preloader from '../../../../compontens/Preloader/Preloader';
@@ -14,6 +15,9 @@ import { getProducts } from '../../../../api/getProducts';
 import { sortHostings } from '../../../../utils/sortHostings';
 import { createNewOrder } from '../../../../api/createNewOrder';
 import { checkBalance } from '../../../../utils/checkBalance';
+
+import { fetchOrders } from '../../../../store/slices/orders';
+import { getOrders } from '../../../../api/getOrders';
 
 import style from '../../../../styles/AccountShop.module.scss';
 
@@ -35,6 +39,7 @@ export default function AccountVps() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const user = useAppSelector(store => store.user.user);
+  const router = useRouter();
 
   const fetchData = async () => {
     const hostings = await getProducts('Hosting', '/api/getProducts');

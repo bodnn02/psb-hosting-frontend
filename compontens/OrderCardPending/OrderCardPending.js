@@ -85,11 +85,11 @@ const OrderCardPending = ({ order }) => {
   }, [order]);
 
   return (
-    <>
+    <a href={isPaid ? `/account/profile/order/${order.id}` : null}>
       <div className={style["card"]}>
         <div className={style["card__header"]}>
           <Link
-            href={`/account/profile/order/${order.id}`}
+            href={isPaid ? `/account/profile/order/${order.id}` : null}
             className={style["card__header-link"]}
           >
             <Image alt="server" src={
@@ -187,7 +187,7 @@ const OrderCardPending = ({ order }) => {
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
       />
-    </>
+    </a>
   );
 };
 

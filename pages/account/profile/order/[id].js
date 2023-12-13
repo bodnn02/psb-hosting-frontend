@@ -117,7 +117,6 @@ const Order = (id) => {
     }
   };
 
-
   useEffect(() => {
     if (
         currentOrder?.order &&
@@ -567,16 +566,19 @@ const Order = (id) => {
                     <p className={
                       currentOrder.order[0].status.includes("Включен") ||
                       currentOrder.order[0].status.includes("выдан")
-                        ? style["order__text-green"]
-                        : currentOrder.order[0].status.includes("Выключен") ||
-                          currentOrder.order[0].status.includes("Заблокирован") ||
-                          currentOrder.order[0].status.includes("Обработка")
+                        ? style["order__text-green"] :
+                        currentOrder.order[0].status.includes("Обработка") ?
+                        style["order__text-yellow"] :
+                          currentOrder.order[0].status.includes("Выключен") ||
+                          currentOrder.order[0].status.includes("Заблокирован")
                         ? style["order__text-red"]
                         : ""
                     }>
                       {currentOrder.order[0].status.includes("Включен") ||
                       currentOrder.order[0].status.includes("выдан")
-                        ? t("profile-order-on")
+                        ? t("profile-order-on") :
+                        currentOrder.order[0].status.includes("Обработка") ?
+                        t("order-status-awaiting-issue")
                         : currentOrder.order[0].status.includes("Выключен")
                         ? t("profile-order-off")
                         : currentOrder.order[0].status.includes("Заблокирован") ||
@@ -588,10 +590,16 @@ const Order = (id) => {
                   <div className={style["order__details-buttons"]}>
                     {currentOrder.order[0].type && (
                         <div>
-                          {(currentOrder.order[0].status.includes("Включен") || currentOrder.order[0].status.includes("выдан")) &&
+                          {currentOrder.order[0].status.includes("выдан") &&
                           !currentOrder.order[0].type.includes("Bulletproof") &&
                           !currentOrder.order[0].type.includes("Hosting") && (
                             <div>
+                              <BtnWithAction
+                                title={t("profile-order-option-two")}
+                                onClick={handleStartServer}
+                                disabled={!activeButtonStartServer}
+                                icon="ci:play"
+                              />
                               <BtnWithAction
                                 title={t("profile-order-option-four")}
                                 onClick={handleStopServer}
@@ -606,20 +614,8 @@ const Order = (id) => {
                               />
                             </div>
                           )}
-                          {currentOrder.order[0].status.includes("Выключен") &&
-                          !currentOrder.order[0].type.includes("Bulletproof") &&
-                          !currentOrder.order[0].type.includes("Hosting") && (
-                            <div>
-                              <BtnWithAction
-                                title={t("profile-order-option-two")}
-                                onClick={handleStartServer}
-                                disabled={!activeButtonStartServer}
-                                icon="ci:play"
-                              />
-                            </div>
-                          )}
-                          {currentOrder.order[0].status.includes('Заблокирован') ||
-                           currentOrder.order[0].status.includes("Обработка") && (
+                          {(currentOrder.order[0].status.includes('Заблокирован') ||
+                           currentOrder.order[0].status.includes("Обработка")) && (
                             <div>
                             {!currentOrder.order[0].type.includes("Bulletproof") &&
                              !currentOrder.order[0].type.includes("Hosting") && (
@@ -638,13 +634,15 @@ const Order = (id) => {
                                 />
                               </div>
                             )}
-                              <BtnWithLink
-                                href="/account/balance"
-                                title={t("order-pay")}
-                                icon={"ion:card-outline"}
-                                colorBtn={"options-link-green"}
-                                iconColor="#1EB949"
-                              />
+                              {(!currentOrder.order[0].status.includes("Обработка")) && (
+                              <BtnWithAction
+                                  title={t("order-pay")}
+                                  onClick={handleToggleAutoRefresh}
+                                  icon={"ion:card-outline"}
+                                  iconColor="#1EB949"
+                                  colorBtn={"options-link-green"}
+                                />
+                                )}
                             </div>
                           )}
                           <BtnWithLink
@@ -754,7 +752,7 @@ const Order = (id) => {
             isSuccess={isSuccess}
             setIsSuccess={setIsSuccess}
           />
-          {currentOrder && currentOrder.type && currentOrder.type !== 'VPN' && (
+          {currentOrder && currentOrder.order[0]?.type && currentOrder.order[0]?.type !== 'VPN' && (
               <PopupChangeSystem
                   isOpen={isChangeSystemPopupOpen}
                   onClose={closeAllPopups}

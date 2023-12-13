@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import 'iconify-icon';
+import { useRouter } from 'next/router';
 
 import LayoutAccount from '../../../compontens/LayoutAccount/LayoutAccount';
 import Preloader from '../../../compontens/Preloader/Preloader';
@@ -18,6 +19,9 @@ import { sortVps } from '../../../utils/sortVps';
 import { sortByCountries } from '../../../utils/sortByCountries';
 import { checkBalance } from '../../../utils/checkBalance';
 import style from '../../../styles/AccountShop.module.scss';
+
+import { fetchOrders } from '../../../store/slices/orders';
+import { getOrders } from '../../../api/getOrders';
 
 AccountVps.getLayout = function getLayout(page) {
   return (
@@ -37,6 +41,7 @@ export default function AccountVps() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const user = useAppSelector(store => store.user.user);
+  const router = useRouter();
 
   const fetchData = async () => {
     try {
@@ -305,10 +310,6 @@ export default function AccountVps() {
               <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-config')}</h3>
                 <p className={style['order-summary__p']}>{selectedConfig ? selectedConfig[3].value : ""}</p>
-              </div>
-              <div className={style['order-summary__item']}>
-                <h3 className={style['order-summary__h3']}>{t('new-service-panel')}</h3>
-                <p className={style['order-summary__p']}>{selectedControlPanel ? selectedControlPanel.title : ""}</p>
               </div>
               <div className={style['order-summary__item']}>
                 <h3 className={style['order-summary__h3']}>{t('new-service-panel')}</h3>

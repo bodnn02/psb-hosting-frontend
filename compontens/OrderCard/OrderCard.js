@@ -65,7 +65,7 @@ const OrderCard = ({ order }) => {
   };*/
 
   return (
-    <>
+    <a href={`/account/profile/order/${order.id}`}>
       <div className={style["card"]}>
         <div className={style["card__header"]}>
           <Link
@@ -136,7 +136,7 @@ const OrderCard = ({ order }) => {
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
       />
-    </>
+    </a>
   );
 };
 
