@@ -85,11 +85,11 @@ const OrderCardPending = ({ order }) => {
   }, [order]);
 
   return (
-    <a href={isPaid ? `/account/profile/order/${order.id}` : null}>
+    <>
       <div className={style["card"]}>
         <div className={style["card__header"]}>
           <Link
-            href={isPaid ? `/account/profile/order/${order.id}` : null}
+            href={`/account/profile/order/${order.id}`}
             className={style["card__header-link"]}
           >
             <Image alt="server" src={
@@ -97,7 +97,7 @@ const OrderCardPending = ({ order }) => {
                 ? server_vps
                 : order.type === 'VPN'
                   ? server_vpn
-                  : order.type.includes('Bulletproof') || order.type.includes('hosting')
+                  : order.type.includes('Bulletproof') || order.type.includes('Hosting')
                     ? server_bulletproof
                     : ''
             } width={48} height={48} />
@@ -187,7 +187,7 @@ const OrderCardPending = ({ order }) => {
         isSuccess={isSuccess}
         setIsSuccess={setIsSuccess}
       />
-    </a>
+    </>
   );
 };
 

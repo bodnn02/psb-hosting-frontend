@@ -25,6 +25,7 @@ import PopupChangeSystem from "../../../../compontens/PopupChangeSystem";
 import PopupChangePasswordOS from "../../../../compontens/PopupChangePasswordOS";
 import PopupChangeConfig from "../../../../compontens/PopupChangeConfig";
 import useToggleAutoRefresh from "../../../../hooks/useToggleAutoRefresh";
+import { makeAutoProlong } from "../../../../api/makeAutoProlong";
 
 import { getProducts } from '../../../../api/getProducts';
 
@@ -128,6 +129,29 @@ const Order = (id) => {
     }
 }, [products, currentOrder]);
 
+const fetchDataBlocked = async () => {
+  setMessage(t("error-pending-password"));
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    const data = await makeAutoProlong(token, id);
+    if (data && Number(data.status) === 200) {
+      setIsPopupOpen(true);
+      setIsSuccess(true);
+      setMessage(t("error-autoprolong"));
+      fetchUserData(token);
+    } else if (data && Number(data.status) !== 200) {
+      setIsPopupOpen(true);
+      setIsSuccess(false);
+      setMessage(t("error-autoprolong-err"));
+    } else {
+      setIsPopupOpen(true);
+      setIsSuccess(false);
+      setMessage(t("error"));
+    }
+  }
+};
+
   const changeSystemFormSubmit = async (dataSystem) => {
     const token =
       typeof window !== "undefined" && localStorage.getItem("token");
@@ -142,6 +166,7 @@ const Order = (id) => {
         setIsSuccess(true);
         fetchData();
         setActiveButtonSystem(true);
+        setIsChangeSystemPopupOpen(false)
       } else {
         setMessage(t("error"));
         setIsPopupOpen(true);
@@ -382,8 +407,7 @@ const Order = (id) => {
                           )}
                           {currentOrder.order_data[0]?.password &&
                             (!currentOrder.order[0]?.type ||
-                              (!currentOrder.order[0]?.type.includes('Bulletproof') &&
-                                !currentOrder.order[0]?.type.includes('Hosting'))) && (
+                              (!currentOrder.order[0]?.type.includes('Hosting'))) && (
                               <li className={style["order__details-item"]}>
                                 <p className={style["order__text-grey"]}>
                                   {t("profile-order-password")}&nbsp;
@@ -413,10 +437,12 @@ const Order = (id) => {
                                     onClick={() => setShowPassword(!showPassword)}
                                   ></iconify-icon>
                                 </div>
+                                {(!currentOrder.order[0]?.type.includes('Bulletproof') &&
                                 <ButtonIcon
                                   icon={"ci:edit-pencil-01"}
                                   handleClick={handleChangePasswordOS}
                                 />
+                                )}
                               </li>
                             )}
                         </ul>
@@ -436,11 +462,17 @@ const Order = (id) => {
                                       &nbsp;{currentOrder.order[0].os}
                                     </p>
                                   </div>
-                                  {(!currentOrder.order[0]?.type ||
-                                   (!currentOrder.order[0]?.type.includes('Bulletproof') &&
-                                    !currentOrder.order[0]?.type.includes('Hosting'))) && (
+                                  {(
+                                    currentOrder.order[0]?.type &&
+                                    !currentOrder.order[0]?.type.includes('Bulletproof') &&
+                                    !currentOrder.order[0]?.type.includes('Hosting') &&
+                                    !(
+                                      currentOrder.order[0].status.includes('Обработка') ||
+                                      currentOrder.order[0].status.includes('Заблокирован')
+                                    )
+                                  ) && (
                                     <ButtonIcon
-                                      icon={"mingcute:settings-3-line"}
+                                      icon={'mingcute:settings-3-line'}
                                       handleClick={handleChangeSystem}
                                     />
                                   )}
@@ -506,11 +538,11 @@ const Order = (id) => {
                           <h3 className={style["order__section-titleConf"]}>
                             {t("profile-order-configuration")}
                           </h3>
-                          <ButtonIcon
+                          {/* <ButtonIcon
                             icon={"mingcute:settings-3-line"}
                             handleClick={handleChangeConfig}
                             disabled={true}
-                          />
+                          /> */}
                         </li>
                       )}
                     {products && (
@@ -637,7 +669,7 @@ const Order = (id) => {
                               {(!currentOrder.order[0].status.includes("Обработка")) && (
                               <BtnWithAction
                                   title={t("order-pay")}
-                                  onClick={handleToggleAutoRefresh}
+                                  onClick={fetchDataBlocked}
                                   icon={"ion:card-outline"}
                                   iconColor="#1EB949"
                                   colorBtn={"options-link-green"}
@@ -752,7 +784,7 @@ const Order = (id) => {
             isSuccess={isSuccess}
             setIsSuccess={setIsSuccess}
           />
-          {currentOrder && currentOrder.order[0]?.type && currentOrder.order[0]?.type !== 'VPN' && (
+          {currentOrder && currentOrder.order && currentOrder.order[0]?.type && currentOrder.order[0]?.type !== 'VPN' && (
               <PopupChangeSystem
                   isOpen={isChangeSystemPopupOpen}
                   onClose={closeAllPopups}
