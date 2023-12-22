@@ -62,7 +62,7 @@ function AppHeader({ setIsLoading }) {
           <img src="/logo.png" alt="logo" />
         </Link>
       </div>
-      <NavMenu />
+      <NavMenu setIsLoading={setIsLoading} />
     </header>
   );
 }

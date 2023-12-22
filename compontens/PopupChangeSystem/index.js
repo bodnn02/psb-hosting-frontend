@@ -29,8 +29,8 @@ export default function PopupChangeSystem({
   
     const selectedVersionData = selectedSystem.versions.find((item) => item.version === selectedVersion[selectedSystem.id]);
   
-    if(selectedVersionData.content) {
-      onUpdateSystem(selectedVersionData.content);
+    if(selectedVersionData.name) {
+      onUpdateSystem(selectedVersionData.name);
     }
   }
 

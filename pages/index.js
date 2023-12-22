@@ -53,7 +53,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styleAdvantages['advantages']}>
+      {/* <section className={styleAdvantages['advantages']}>
         <h2 className={`${['h2-title']} ${styleAdvantages['section-title']}`}>
           {t('advantages-title-main')}
         </h2>
@@ -160,7 +160,7 @@ export default function Home() {
             </div>
           </SwiperSlide>
         </Swiper>
-      </section>
+      </section> */}
 
       <section className={style.servises}>
         <h2 className={`${['h2-title']} ${style.servises__title}`}>

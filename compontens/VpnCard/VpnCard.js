@@ -71,7 +71,7 @@ const VpnCard = ({ vpnItem }) => {
         <p className={style['card__price']}>
           {`$${vpnItem.price}/${t('order-price-period')}`}
         </p>
-        <Link href={`/account/shop/vpn/${vpnItem.id}`}>
+        <Link href={`/account/shop/vpn`}>
           {t('button-buy-item')}
         </Link>
       </div>

@@ -72,7 +72,7 @@ const VpsCard = ({ vpsItem, page }) => {
         <p className={style['card__price']}>
           {`$${vpsItem.price}/${t('order-price-period')}`}
         </p>
-        <Link href={`/account/shop/${page}/${vpsItem.id}`}>
+        <Link href={`/account/shop${page === 'vps' ? '' : `/${page}`}`}>
           {t('button-buy-item')}
         </Link>
       </div>

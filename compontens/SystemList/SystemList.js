@@ -69,6 +69,7 @@ const SystemList = ({ systems, selectedSystem: propSelectedSystem = null, onSele
     if (existingOS) {
       existingOS.versions.push({
         id: os.id,
+        name: os.name,
         version: os.name.split(/[-\s]/).slice(1).join(' '),
         content: os.content
       });
@@ -80,6 +81,7 @@ const SystemList = ({ systems, selectedSystem: propSelectedSystem = null, onSele
         name: osName,
         versions: [{
           id: os.id,
+          name: os.name,
           version: os.name.split(/[-\s]/).slice(1).join(' '),
           content: os.content
         }],

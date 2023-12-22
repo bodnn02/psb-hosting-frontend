@@ -134,7 +134,7 @@ const fetchDataBlocked = async () => {
 
   const token = localStorage.getItem("token");
   if (token) {
-    const data = await makeAutoProlong(token, id);
+    const data = await makeAutoProlong(token, currentOrder.order[0].order_id);
     if (data && Number(data.status) === 200) {
       setIsPopupOpen(true);
       setIsSuccess(true);
